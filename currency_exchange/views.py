@@ -43,8 +43,10 @@ class DailyExchangeRateView(APIView):
 class ExchangeRateByDate(APIView):
 
     def get(self, request):
-        if request.query_params:
+        if 'date' in request.query_params:
             date_str = request.query_params['date']
+            if datetime.strptime(date_str, '%Y-%m-%d').weekday() >= 5:
+                return Response({'error': 'Cannot query weekends'}, status=status.HTTP_400_BAD_REQUEST)
             exchange_rate = ExchangeRate.objects.filter(rate_date=date_str)
             if not exchange_rate:
                 vat_service = VatService()
@@ -62,19 +64,12 @@ class ExchangeRateByDate(APIView):
                 serializer = ExchangeRateSerializer(exchange_rate, many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response({'ERROR', 'No date provided'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-class ExchangeRateByPeriod(APIView):
-
-    def get(self):
-        pass
+            return Response({'error', 'No date provided'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ExchangeRateChart(APIView):
 
     def get(self, request):
-        print(request.query_params)
         form = QueryForm(request.POST)
         currency = request.query_params['currency']
         # If dates are not provided, return rates for current date
