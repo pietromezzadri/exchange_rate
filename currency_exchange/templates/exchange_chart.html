@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static "pico.min.css" %}">
+    <title>Exchange Rate</title>
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</head>
+<body>
+<div id="container_data"></div>
+<script>
+       Highcharts.chart('container_data',{{ data | safe }});
+</script>
+{% block container %}
+<div style="margin: 50px;">
+  <form>
+    <div style="display: flex; align-items: start; justify-content: space-evenly;">
+      {% for field in form %}
+      <div>
+        {{ field.label }}
+        {{ field }}
+        {% if form.errors %}
+        {% for error in field.errors %}
+          <div>
+            {{ error }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      </div>
+      {% endfor %}
+      </div>
+      <button type="submit" style="max-width: 200px;">Search</button>
+    </form>
+</div>
+{% endblock %}
+</body>
+</html>

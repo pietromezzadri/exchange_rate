@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from dotenv import dotenv_values
+import mimetypes
+
+mimetypes.add_type("text/css", ".css", True)
 
 config = dotenv_values('.env')
 
@@ -29,6 +32,10 @@ SECRET_KEY = config['SECRET_KEY']
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 
 # Application definition
