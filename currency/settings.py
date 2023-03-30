@@ -46,6 +46,10 @@ else:
 if not IS_HEROKU:
     DEBUG = True
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATIC_URL = "static/"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
