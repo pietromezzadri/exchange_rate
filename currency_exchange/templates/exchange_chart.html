@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static "pico.min.css" %}">
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
     <title>Exchange Rate</title>
    <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -16,12 +16,12 @@
        Highcharts.chart('container_data',{{ data | safe }});
 </script>
 {% block container %}
-<div style="margin: 50px;">
+<div style="margin: 50px; display: flex; justify-content: center;">
   <form>
     {% csrf_token %}
     <div style="display: flex; align-items: start; justify-content: space-evenly;">
       {% for field in form %}
-      <div>
+      <div style="margin: 20px;">
         {{ field.label }}
         {{ field }}
         {% if form.errors %}
@@ -34,7 +34,7 @@
       </div>
       {% endfor %}
       </div>
-      <button type="submit" style="max-width: 200px;">Search</button>
+      <button type="submit" style="max-width: 200px; margin-left: 20px;">Search</button>
     </form>
 </div>
 {% endblock %}
