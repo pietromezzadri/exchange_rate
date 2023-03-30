@@ -1,4 +1,5 @@
 *.pyc
+*.sqlite3
 .pylintrc
 .env
 __pycache__/
