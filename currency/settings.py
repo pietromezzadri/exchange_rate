@@ -34,8 +34,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['radiant-brook-13687',
-                 'radiant-brook-13687']
+ALLOWED_HOSTS = ['radiant-brook-13687.herokuapp.com']
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
