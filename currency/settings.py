@@ -36,11 +36,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# Generally avoid wildcards(*). However since Heroku router provides hostname validation it is ok
-if IS_HEROKU:
-    ALLOWED_HOSTS = ["*"]
-else:
-    ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['https://salty-plateau-96183.herokuapp.com']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if not IS_HEROKU:
