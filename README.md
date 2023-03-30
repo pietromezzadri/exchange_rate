@@ -6,6 +6,7 @@ Currency Exchange Rate
 
 A simple project to display the rate of BRL, EUR and JPY within a week, using USD as the base currency. It also has API calls for daily per date rates.
 
+![Screenshot](/media/screenshot.png)
 
 Developed with:
 
