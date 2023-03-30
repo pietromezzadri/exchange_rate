@@ -32,10 +32,10 @@ IS_HEROKU = "DYNO" in os.environ
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://radiant-brook-13687.herokuapp.com',
-                 'http://radiant-brook-13687.herokuapp.com']
+ALLOWED_HOSTS = ['radiant-brook-13687',
+                 'radiant-brook-13687']
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
