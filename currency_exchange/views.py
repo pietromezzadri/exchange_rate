@@ -85,7 +85,8 @@ class ExchangeRateChart(APIView):
                 form.add_error(
                     'final_date', 'The date range cannot exceed 5 work days or be negative')
             else:
-                for day in range(time_delta):
+                # Query a record for each date within date range
+                for day in range(time_delta+1):
                     day_check = initial_date_obj + timedelta(days=day)
                     if day_check.weekday() >= 5:
                         initial_date = datetime.now().strftime('%Y-%m-%d')
@@ -114,6 +115,7 @@ class ExchangeRateChart(APIView):
         converter = Converter()
         exchage_rates = ExchangeRate.objects.filter(
             rate_date__range=[initial_date, final_date]).order_by('rate_date')
+        # Transform queryset into list of values for highcharts
         dates = list(exchage_rates.values_list('rate_date', flat=True))
         if currency == 'BRL':
             rates = list(exchage_rates.values_list('brl_rate', flat=True))
