@@ -7,8 +7,8 @@ on:
     branches: [ "main" ]
 
 env:
-  SECRET_KEY: 'django-insecure-wos1db3+ks2o9mmuj5pvhy*pg05t)4e5gq-^zxar3x@)n6annw'
-  DEBUG: False
+  SECRET_KEY: ${{ env.SECRET_KEY }}
+  DEBUG: ${{ env.DEBUG }}
 
 jobs:
   build:
