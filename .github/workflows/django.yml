@@ -2,24 +2,23 @@ name: Django CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
   DEBUG: ${{ secrets.DEBUG }}
-  AWS_REGION: us-east-1                   
-  ECR_REPOSITORY: exchange-rate           
-  ECS_SERVICE: ecs-service-exchange                 
-  ECS_CLUSTER: currency-exchange                 
-  ECS_TASK_DEFINITION: .aws/task-definition.json 
-                                               
-  CONTAINER_NAME: currency-exchange  
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: exchange-rate
+  ECS_SERVICE: exchange-rate
+  ECS_CLUSTER: exchange-rate
+  ECS_TASK_DEFINITION: .aws/task-definition.json
+
+  CONTAINER_NAME: exchange-rate
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
@@ -27,19 +26,19 @@ jobs:
         python-version: [3.9]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run Tests
-      run: |
-        python manage.py test
-        
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run Tests
+        run: |
+          python manage.py test
+
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
