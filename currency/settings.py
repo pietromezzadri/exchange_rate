@@ -21,9 +21,6 @@ mimetypes.add_type("text/css", ".css", True)
 
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -34,23 +31,24 @@ IS_HEROKU = "DYNO" in os.environ
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
-ALLOWED_HOSTS = ['salty-plateau-96183.herokuapp.com']
+ALLOWED_HOSTS = ['salty-plateau-96183.herokuapp.com', '127.0.0.1']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if not IS_HEROKU:
     DEBUG = True
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STATIC_URL = "static/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
+# Make a tuple of strings instead of a string
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "staticfiles/")]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
@@ -150,11 +148,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_URL = 'static/'
 
 # Test Runner Config
 

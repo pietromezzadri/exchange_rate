@@ -3,3 +3,4 @@
 .pylintrc
 .env
 __pycache__/
+static/
